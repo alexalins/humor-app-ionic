@@ -41,4 +41,8 @@ export class PerfilPage implements OnInit {
   edit() {
     
   }
+
+  click() {
+    alert("click")
+  }
 }
