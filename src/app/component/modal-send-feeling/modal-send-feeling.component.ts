@@ -8,8 +8,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalSendFeelingComponent implements OnInit {
   modalController: ModalController
-  cardSelecionado: string = "card"
-  list: number[] = [1, 2, 3, 4, 5];
+  card: string = "card"
+  cardSelecionado: string = "card-selecionado"
+  idCard: number = 0
+  list: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(modalController: ModalController) { 
     this.modalController = modalController
@@ -22,8 +24,6 @@ export class ModalSendFeelingComponent implements OnInit {
   }
 
   tapCard(id) {
-    console.log(id)
-    console.log(this.list.keys )
-    this.cardSelecionado === "card" || this.list.keys == id ? this.cardSelecionado = "card-selecionado" : this.cardSelecionado = "card"
+    this.idCard = id
   }
 }
