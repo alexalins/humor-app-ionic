@@ -1,7 +1,31 @@
 #button-outline {
     margin-left: 25px;
     margin-right: 25px;
-    height: 50px;
-    margin-top: 30px;
 	--border-radius: 30px;
+}
+
+#button {
+    margin-left: 25px;
+    margin-right: 25px;
+	--border-radius: 30px;
+}
+
+#grid-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#icon {
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+#name {
+    color: white;
+    font-weight: bold;
+}
+
+#card {
+    text-align: center;
 }

@@ -1,12 +1,41 @@
 <app-header title="Perfil"></app-header>
 
 <ion-content>
-    <ion-button expand="block" id="button-outline" color="danger" fill="outline" (click)="exit()">
-        <ion-row>
-          <ion-col width-90>Sair</ion-col>
-          <ion-col width-10>
-            <ion-icon name="enter-outline"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-button>
+  <ion-card id="card">
+    <ion-card-header>
+      <img id="icon" src="https://i.pinimg.com/originals/89/b9/69/89b969a4458042ba6da1cab3355187e9.jpg" alt="Perfil"/>
+    </ion-card-header>
+    <ion-card-content>
+      <h2 id="name">Alexa Lins</h2>
+      <h2>alexa.glinsoo@gmail.com</h2>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid id="grid-button">
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" id="button" (click)="edit()">
+          <ion-row>
+            <ion-col width-90>Editar</ion-col>
+            <ion-col width-10>
+              <ion-icon name="create-outline"></ion-icon>      
+            </ion-col>
+          </ion-row>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" id="button-outline" color="danger" fill="outline" (click)="exit()">
+          <ion-row>
+            <ion-col width-90>Sair</ion-col>
+            <ion-col width-10>
+                <ion-icon name="enter-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list *ngFor="let teste of list">
+    <app-card-feeling [item]="item"></app-card-feeling>
+  </ion-list>
 </ion-content>
