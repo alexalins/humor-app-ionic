@@ -17,7 +17,7 @@ export class EditPage implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/perfil']);
+    this.router.navigate(['/tabs/perfil']);
   }
 
   clickFoto() {
