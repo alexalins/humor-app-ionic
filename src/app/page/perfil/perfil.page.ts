@@ -29,7 +29,7 @@ export class PerfilPage implements OnInit {
 
   constructor(router: Router) {
     this.router = router
-   }
+  }
 
   ngOnInit() {
   }
@@ -39,7 +39,7 @@ export class PerfilPage implements OnInit {
   }
 
   edit() {
-    
+    this.router.navigate(['/edit']);
   }
 
   click() {

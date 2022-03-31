@@ -1,0 +1,30 @@
+#title {
+    font-size: 18px;
+}
+
+#card {
+    text-align: center;
+}
+
+#icon {
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+#input {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+    --border-radius: 30px;
+    --background: rgb(78, 78, 78);
+    --placeholder-color: rgb(255, 255, 255);
+}
+
+#button {
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 50px;
+    margin-top: 30px;
+	--border-radius: 30px;
+}

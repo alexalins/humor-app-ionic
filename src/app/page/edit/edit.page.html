@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" id="title">Editar Perfil</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card id="card">
+    <ion-card-header>
+      <img id="icon" src="https://i.pinimg.com/originals/89/b9/69/89b969a4458042ba6da1cab3355187e9.jpg" alt="Perfil"/>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>alexa.glinsoo@gmail.com</h2>
+      <ion-item id="input">
+        <ion-label fixed>Nome</ion-label>
+        <ion-input #input type="text" placeholder="Alexa Lins"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" id="button" color="primary" fill="outline">
+    <ion-row>
+      <ion-col width-90>Mudar Senha</ion-col>
+      <ion-col width-10>
+        <ion-icon name="key-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-button>
+
+  <ion-button expand="block" id="button">
+    <ion-row>
+      <ion-col width-90>Concluir</ion-col>
+      <ion-col width-10>
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-button>
+</ion-content>
