@@ -1,0 +1,26 @@
+#button {
+    margin-left: 25px;
+    margin-right: 25px;
+    height: 50px;
+	--border-radius: 30px;
+}
+
+#image {
+    width: 200px;
+}
+
+#card {
+    --background: rgb(78, 78, 78);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+#card-selecionado {
+    --background: rgb(1, 95, 120);
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+h2 {
+    color: white;
+}

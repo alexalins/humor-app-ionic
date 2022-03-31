@@ -1,0 +1,27 @@
+<ion-content id="login">
+  <ion-item id="input"  class="first">
+    <ion-label fixed>Email</ion-label>
+    <ion-input #input type="text"></ion-input>
+  </ion-item>
+  <ion-item id="input">
+      <ion-label fixed>Password</ion-label>
+      <ion-input #input [type]=typePassword></ion-input>
+      <ion-icon [name]=iconPassword (click)="clickSeePassword()"></ion-icon>
+  </ion-item>
+  <ion-button expand="block" id="button" (click)="goPage()">
+    <ion-row>
+      <ion-col width-90>Entrar</ion-col>
+      <ion-col width-10>
+        <ion-icon name="arrow-redo-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-button>
+  <ion-button expand="block" id="button" color="primary" fill="outline" (click)="goPage()">
+    <ion-row>
+      <ion-col width-90>Recuperar Senha</ion-col>
+      <ion-col width-10>
+        <ion-icon name="arrow-redo-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-button>
+</ion-content>
