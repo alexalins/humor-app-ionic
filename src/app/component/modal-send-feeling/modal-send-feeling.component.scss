@@ -14,13 +14,15 @@ ion-grid {
 }
 
 #image {
-    width: 200px;
+    width: 75px;
 }
 
 #card {
     --background: rgb(78, 78, 78);
     margin-left: 16px;
     margin-right: 16px;
+    border-radius: 30px;
+    text-align: center;
 }
 
 #card-selecionado {
