@@ -1,7 +1,7 @@
 <app-header title="Lista"></app-header>
 <ion-content id="app">
   <!-- List of Text Items -->
-  <ion-list *ngFor="let teste of list">
+  <ion-list *ngFor="let item of items">
     <app-card-feeling [item]="item"></app-card-feeling>
   </ion-list>
   <app-button-add></app-button-add>
