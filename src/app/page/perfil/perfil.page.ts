@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Feeling } from 'src/app/shared/model/Feeling';
 import { Item } from 'src/app/shared/model/Item';
 import { User } from 'src/app/shared/model/User';
+import { LoginService } from 'src/app/shared/service/login.service';
 
 @Component({
   selector: 'app-perfil',
@@ -10,6 +11,7 @@ import { User } from 'src/app/shared/model/User';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  loginService: LoginService
   router: Router
   list: number[] = [1, 2, 3, 4, 5, 6];
   user: User = {  
@@ -27,15 +29,16 @@ export class PerfilPage implements OnInit {
     feeling: this.feeling
   }
 
-  constructor(router: Router) {
+  constructor(router: Router, loginService: LoginService) {
     this.router = router
+    this.loginService = loginService
   }
 
   ngOnInit() {
   }
 
   exit() {
-    this.router.navigate(['/']);
+    this.loginService.logout()
   }
 
   edit() {

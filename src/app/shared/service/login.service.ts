@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../model/User';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import Utils from '../util/Utils';
-import { ToastController } from '@ionic/angular';
+import { UtilsService } from '../util/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,41 +13,57 @@ export class LoginService {
   firebaseauth: AngularFireAuth
   db: AngularFireDatabase
   router: Router
-  toastController: ToastController
+  util: UtilsService
 
   constructor(
     firebaseauth: AngularFireAuth,
     db: AngularFireDatabase,
     router: Router,
-    toastController: ToastController
+    util: UtilsService
   ) {
     this.firebaseauth = firebaseauth,
     this.db = db,
     this.router = router,
-    this.toastController = toastController
+    this.util = util
   }
 
   login(user: User) {
     this.firebaseauth.signInWithEmailAndPassword(user.email, user.password)
-      .then(() => {
-        this.toast('Login efetuado com sucesso');
-        console.log(this.firebaseauth);
-        //this.recoverUser(user.email);
-        //this.router.navigate(['/tabs/lista']);
+      .then((result) => {
+        this.util.toast('Login efetuado com sucesso');
+        this.saveUser(result, user)
+        this.router.navigate(['/tabs/lista']);
       })
       .catch((erro: any) => {
-        console.log(erro)
-        this.toast(erro);
+        this.util.toast(erro);
       });
+  }
+
+  saveUser(result: any, user: User) {
+    user.id = result['user']['uid']
+    user.name = result['user']['displayName']
+    user.image = result['user']['photoURL']
+    //limpando pra nao salvar senha
+    user.password = null
+    //
+    let json = JSON.stringify(user);
+    localStorage.setItem('user', json);
+  }
+
+  isExist(): boolean {
+    if(localStorage.getItem('user') == null) {
+      return false
+    }
+    return true
   }
 
   newPassword(email: string) {
     this.firebaseauth.sendPasswordResetEmail(email)
       .then(() => {
-        this.toast('E-mail enviado');
+        this.util.toast('E-mail enviado');
       })
       .catch((erro: any) => {
-        this.toast(erro);
+        this.util.toast(erro);
       });
   }
 
@@ -56,19 +71,12 @@ export class LoginService {
     this.firebaseauth.signOut()
       .then(() => {
         localStorage.removeItem('user');
-        this.toast('Você saiu');
+        this.util.toast('Você saiu');
+        this.router.navigate(['/']);
       })
       .catch((erro: any) => {
-        this.toast(erro);
+        this.util.toast(erro);
       });
   }
-
-  async toast(message: string) {
-    const toast = await this.toastController.create({
-        message: message,
-        duration: 2000,
-        position: "top"
-    });
-    toast.present();
-}
+ 
 }
