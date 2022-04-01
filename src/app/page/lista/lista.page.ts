@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalSendFeelingComponent } from 'src/app/component/modal-send-feeling/modal-send-feeling.component';
-import { Feeling } from 'src/app/model/Feeling';
-import { Item } from 'src/app/model/Item';
-import { User } from 'src/app/model/User';
+import { ModalSendFeelingComponent } from 'src/app/shared/component/modal-send-feeling/modal-send-feeling.component';
+import { Feeling } from 'src/app/shared/model/Feeling';
+import { Item } from 'src/app/shared/model/Item';
+import { User } from 'src/app/shared/model/User';
 
 @Component({
   selector: 'app-lista',

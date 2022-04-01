@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Feeling } from 'src/app/model/Feeling';
-import { Item } from 'src/app/model/Item';
-import { User } from 'src/app/model/User';
+import { Feeling } from 'src/app/shared/model/Feeling';
+import { Item } from 'src/app/shared/model/Item';
+import { User } from 'src/app/shared/model/User';
 
 @Component({
   selector: 'app-perfil',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Item } from 'src/app/model/Item';
+import { Item } from 'src/app/shared/model/Item';
 
 @Component({
   selector: 'app-card-feeling',

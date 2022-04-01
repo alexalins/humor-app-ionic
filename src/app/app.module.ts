@@ -6,14 +6,27 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalSendFeelingComponent } from './component/modal-send-feeling/modal-send-feeling.component';
-import { ModalSendFeelingModule } from './component/modal-send-feeling/modal-send-feeling.module';
 import { TabsPageModule } from './tabs/tabs.module';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TabsPageModule],
+  imports: [BrowserModule,
+      IonicModule.forRoot(),
+      AppRoutingModule,
+      TabsPageModule,
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireAuthModule,
+      AngularFirestoreModule,
+      AngularFireStorageModule,
+      AngularFireDatabaseModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })

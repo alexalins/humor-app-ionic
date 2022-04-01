@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
-import { HeaderModule } from 'src/app/component/header/header.module';
-import { CardFeelingModule } from 'src/app/component/card-feeling/card-feeling.module';
+import { HeaderModule } from 'src/app/shared/component/header/header.module';
+import { CardFeelingModule } from 'src/app/shared/component/card-feeling/card-feeling.module';
 
 @NgModule({
   imports: [
