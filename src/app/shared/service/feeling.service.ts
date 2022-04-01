@@ -23,7 +23,7 @@ export class FeelingService {
   getAllItemFeeling() {
     return this.db.list(path, ref => ref.limitToLast(25)).snapshotChanges().pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
+        return changes.map(c => ({ id: c.payload.key, ...(c.payload.val() as Item) }));
       }
       )
     );
@@ -32,7 +32,7 @@ export class FeelingService {
   getAllItemFeelingUser() {
     return this.db.list(path).snapshotChanges().pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
+        return changes.map(c => ({ id: c.payload.key, ...(c.payload.val() as Item) }));
       }
       )
     );
@@ -41,7 +41,7 @@ export class FeelingService {
   getAllFeeling() {
     return this.db.list(pathFeeling).snapshotChanges().pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Feeling) }));
+        return changes.map(c => ({...(c.payload.val() as Feeling) }));
       }
       )
     );
@@ -63,7 +63,11 @@ export class FeelingService {
   }
 
   removeFeeling(id: string) {
-    this.db.object(`${path}/${id}`).remove();
-    this.util.toast('Sentimento apagado');
+    this.db.object(`${path}/${id}`).remove().then(() => {
+      this.util.toast('Sentimento apagado');
+      window.location.reload()
+    }).catch((erro) => {
+      this.util.toast(erro)
+    });
   }
 }

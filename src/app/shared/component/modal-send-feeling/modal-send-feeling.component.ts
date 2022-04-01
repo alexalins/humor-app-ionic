@@ -59,7 +59,7 @@ export class ModalSendFeelingComponent implements OnInit {
     item.user = this.user
     item.feeling = this.feeling
     item.date = this.util.getDate()
-    item.id = this.util.getCurrentTime()
+    //item.id = this.util.getCurrentTime()
     //
     if(this.feelingService.newFeeling(item)) {
       this.dismissModal()

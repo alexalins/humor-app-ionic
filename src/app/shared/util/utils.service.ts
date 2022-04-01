@@ -3,6 +3,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { FeelingService } from '../service/feeling.service';
 import { LoginService } from '../service/login.service';
 import { DatePipe } from '@angular/common';
+import { resourceLimits } from 'worker_threads';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class UtilsService {
   async toast(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
-      position: "top"
+      duration: 1000,
+      position: "bottom"
     });
     toast.present();
   }
@@ -55,7 +56,8 @@ export class UtilsService {
 
   async alertConfirmDelete(id: string, service: FeelingService) {
     const alert = await this.alertController.create({
-      header: 'Deseja apagar essa mensagem?',
+      header: 'Deseja apagar esse sentimento?',
+      cssClass:'buttonCss',
       buttons: [
         {
           text: 'Cancelar',
@@ -66,7 +68,7 @@ export class UtilsService {
         }, {
           text: 'Okay',
           handler: () => {
-            service.removeFeeling(id);
+            service.removeFeeling(id)
           }
         }
       ]

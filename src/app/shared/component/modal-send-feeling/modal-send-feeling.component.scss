@@ -19,18 +19,22 @@ ion-grid {
 
 #card {
     --background: rgb(78, 78, 78);
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
     border-radius: 30px;
     text-align: center;
+    height: 170px;
 }
 
 #card-selecionado {
     --background: rgb(1, 95, 120);
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 0px;
     border-radius: 30px;
     text-align: center;
+    height: 170px;
 }
 
 h2 {
