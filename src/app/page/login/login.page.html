@@ -1,14 +1,14 @@
 <ion-content id="login">
   <ion-item id="input"  class="first">
-    <ion-label fixed>Email</ion-label>
-    <ion-input #input type="text"></ion-input>
+    <ion-label fixed>E-mail</ion-label>
+    <ion-input #input type="text" name="email" [(ngModel)]="user.email"></ion-input>
   </ion-item>
   <ion-item id="input">
       <ion-label fixed>Password</ion-label>
-      <ion-input #input [type]=typePassword></ion-input>
+      <ion-input #input [type]=typePassword name="password" [(ngModel)]="user.password"></ion-input>
       <ion-icon [name]=iconPassword (click)="clickSeePassword()"></ion-icon>
   </ion-item>
-  <ion-button expand="block" id="button" (click)="goPage()">
+  <ion-button expand="block" id="button" (click)="login()">
     <ion-row>
       <ion-col width-90>Entrar</ion-col>
       <ion-col width-10>

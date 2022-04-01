@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { User } from '../model/User';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import Utils from '../util/Utils';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,30 +13,31 @@ export class LoginService {
 
   firebaseauth: AngularFireAuth
   db: AngularFireDatabase
-  toastController: ToastController
   router: Router
+  toastController: ToastController
 
   constructor(
     firebaseauth: AngularFireAuth,
     db: AngularFireDatabase,
-    toastController: ToastController,
     router: Router,
+    toastController: ToastController
   ) {
     this.firebaseauth = firebaseauth,
-      this.db = db,
-      this.toastController = toastController
-    this.router = router
+    this.db = db,
+    this.router = router,
+    this.toastController = toastController
   }
 
   login(user: User) {
     this.firebaseauth.signInWithEmailAndPassword(user.email, user.password)
       .then(() => {
         this.toast('Login efetuado com sucesso');
-        console.log(this.firebaseauth.user);
+        console.log(this.firebaseauth);
         //this.recoverUser(user.email);
-        this.router.navigate(['/tabs/lista']);
+        //this.router.navigate(['/tabs/lista']);
       })
       .catch((erro: any) => {
+        console.log(erro)
         this.toast(erro);
       });
   }
@@ -61,12 +63,12 @@ export class LoginService {
       });
   }
 
-  private async toast(message: string) {
+  async toast(message: string) {
     const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: "top"
+        message: message,
+        duration: 2000,
+        position: "top"
     });
     toast.present();
-  }
+}
 }

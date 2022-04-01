@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/shared/model/User';
+import { LoginService } from 'src/app/shared/service/login.service';
+import Utils from 'src/app/shared/util/Utils';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +14,12 @@ export class LoginPage implements OnInit {
   iconPassword: String = "eye-outline"
   typePassword: String = "password"
   router: Router
+  loginService: LoginService
+  user: User = new User();
 
-  constructor(router: Router) {
+  constructor(router: Router, loginService: LoginService) {
     this.router = router
+    this.loginService = loginService
   }
 
   ngOnInit() {
@@ -27,5 +33,9 @@ export class LoginPage implements OnInit {
   goPage() {
     console.log("page")
     this.router.navigate(['/tabs/lista']);
+  }
+
+  login() {
+    this.loginService.login(this.user);
   }
 }
