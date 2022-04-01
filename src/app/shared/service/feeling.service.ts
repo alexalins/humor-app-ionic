@@ -54,8 +54,10 @@ export class FeelingService {
         .then(() => {
           resolve
           this.util.toast('Sentimento salvo com sucesso');
+          return true
         }).catch((erro) => {
           this.util.toast(erro);
+          return false
         });
     })
   }
