@@ -17,9 +17,18 @@ export class FeelingService {
   }
 
   getAllItemFeeling() {
-    return this.db.list(path).snapshotChanges().pipe(
+      return this.db.list(path, ref => ref.limitToLast(25)).snapshotChanges().pipe(
           map(changes => {
             return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
+          }
+        )
+      );
+  }
+
+  getAllItemFeelingUser() {
+      return this.db.list(path).snapshotChanges().pipe(
+          map(changes => {
+            return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item)}));
           }
         )
       );

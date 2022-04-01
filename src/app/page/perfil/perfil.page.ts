@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Feeling } from 'src/app/shared/model/Feeling';
+import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/model/Item';
 import { User } from 'src/app/shared/model/User';
+import { FeelingService } from 'src/app/shared/service/feeling.service';
 import { LoginService } from 'src/app/shared/service/login.service';
 
 @Component({
@@ -12,29 +13,37 @@ import { LoginService } from 'src/app/shared/service/login.service';
 })
 export class PerfilPage implements OnInit {
   loginService: LoginService
+  feelingService: FeelingService
   router: Router
-  list: number[] = [1, 2, 3, 4, 5, 6];
-  user: User = {  
-    name: "Alexa"
-  }
+  items: Item[] = [];
 
-  feeling: Feeling = {  
-    name: "Fofa",
-    image: "https://firebasestorage.googleapis.com/v0/b/humor-app-7a94a.appspot.com/o/feeling%2Ficone-fofa-cor.png?alt=media&token=d7996d2a-e52a-43dc-a4e4-5f8786806812"
-  }
-
-  item: Item = {
-    date: '30/03/2022',
-    user: this.user,
-    feeling: this.feeling
-  }
-
-  constructor(router: Router, loginService: LoginService) {
+  constructor(router: Router, loginService: LoginService, feelingService: FeelingService) {
     this.router = router
     this.loginService = loginService
+    this.feelingService = feelingService
   }
 
   ngOnInit() {
+    this.getMyFeeling()
+  }
+
+  getMyFeeling() {
+    let json = localStorage.getItem('user');
+    let user: User = JSON.parse(json);
+    console.log(user)
+    let myItem: Observable<any>;
+    myItem = this.feelingService.getAllItemFeelingUser();
+    myItem.subscribe(data =>{
+      //depois arrumo isso direito
+      for(let item of data) {
+        if(item.user.id == user.id) {
+          this.items.push(item)
+        }
+      }
+      this.items = this.items.reverse()
+    })
+
+    
   }
 
   exit() {
