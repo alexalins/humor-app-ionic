@@ -3,34 +3,60 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { map } from 'rxjs/operators';
 import { Feeling } from '../model/Feeling';
 import { Item } from '../model/Item';
+import { UtilsService } from '../util/utils.service';
 
 const path = 'my-feeling';
+const pathFeeling = 'feeling';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeelingService {
   db: AngularFireDatabase
+  util: UtilsService
 
-  constructor(db: AngularFireDatabase) {
+  constructor(db: AngularFireDatabase, util: UtilsService) {
     this.db = db
+    this.util = util
   }
 
   getAllItemFeeling() {
-      return this.db.list(path, ref => ref.limitToLast(25)).snapshotChanges().pipe(
-          map(changes => {
-            return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
-          }
-        )
-      );
+    return this.db.list(path, ref => ref.limitToLast(25)).snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
+      }
+      )
+    );
   }
 
   getAllItemFeelingUser() {
-      return this.db.list(path).snapshotChanges().pipe(
-          map(changes => {
-            return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item)}));
-          }
-        )
-      );
+    return this.db.list(path).snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Item) }));
+      }
+      )
+    );
+  }
+
+  getAllFeeling() {
+    return this.db.list(pathFeeling).snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...(c.payload.val() as Feeling) }));
+      }
+      )
+    );
+  }
+
+  newFeeling(item: Item) {
+    return new Promise((resolve) => {
+      this.db.list(path)
+        .push(item)
+        .then(() => {
+          resolve
+          this.util.toast('Sentimento salvo com sucesso');
+        }).catch((erro) => {
+          this.util.toast(erro);
+        });
+    })
   }
 }

@@ -16,6 +16,7 @@ export class PerfilPage implements OnInit {
   feelingService: FeelingService
   router: Router
   items: Item[] = [];
+  user: User
 
   constructor(router: Router, loginService: LoginService, feelingService: FeelingService) {
     this.router = router
@@ -24,19 +25,18 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit() {
+    let json = localStorage.getItem('user');
+    this.user = JSON.parse(json);
     this.getMyFeeling()
   }
 
   getMyFeeling() {
-    let json = localStorage.getItem('user');
-    let user: User = JSON.parse(json);
-    console.log(user)
     let myItem: Observable<any>;
     myItem = this.feelingService.getAllItemFeelingUser();
     myItem.subscribe(data =>{
       //depois arrumo isso direito
       for(let item of data) {
-        if(item.user.id == user.id) {
+        if(item.user.id == this.user.id) {
           this.items.push(item)
         }
       }

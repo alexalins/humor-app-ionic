@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title >Salvar Sentimentos</ion-title>
+    <ion-title>Salvar Sentimentos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Fechar</ion-button>
     </ion-buttons>
@@ -11,20 +11,20 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="6" size-xs="6" size-sm="6" size-md="4" size-lg="3" *ngFor="let item of list">
-        <ion-card  tappable (click)="tapCard(item)" [id]="idCard == item ? cardSelecionado : card">
+      <ion-col size="6" size-xs="6" size-sm="6" size-md="4" size-lg="3" *ngFor="let feeling of feelings">
+        <ion-card  tappable [id]="idCard == feeling.id ? cardSelecionado : card" (click)="selectCard(feeling)">
           <ion-card-header>
-            <img id="image" src="https://firebasestorage.googleapis.com/v0/b/humor-app-7a94a.appspot.com/o/feeling%2Ficone-fofa-cor.png?alt=media&token=d7996d2a-e52a-43dc-a4e4-5f8786806812"/>
+            <img id="image" [src]="feeling.image"/>
           </ion-card-header>
           <ion-card-content>
-            <h2 class="ion-text-center">Sentimento</h2>
+            <h2 class="ion-text-center">{{feeling.name}}</h2>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-button expand="block" id="button" vertical="bottom">
+  <ion-button expand="block" id="button" vertical="bottom" (click)="saveFeeling()">
     <ion-row>
       <ion-col width-90>Salvar</ion-col>
       <ion-col width-10>
