@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { FeelingService } from '../service/feeling.service';
 import { LoginService } from '../service/login.service';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +51,49 @@ export class UtilsService {
     });
 
     await alert.present();
+  }
+
+  async alertConfirmDelete(id: string, service: FeelingService) {
+    const alert = await this.alertController.create({
+      header: 'Deseja apagar essa mensagem?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            service.removeFeeling(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  getCurrentTime() {
+    let dateTime = new Date()
+    const datepipe: DatePipe = new DatePipe('en-US')
+    let formattedDate = datepipe.transform(dateTime, 'HHmmss')
+    return formattedDate
+  }
+
+  getDate() {
+    let date = new Date();
+    let day = date.getDate().toString();
+    let month = (date.getMonth() + 1).toString();
+    let year = date.getFullYear().toString();
+
+    if (day.length == 1)
+      day = '0' + day;
+    if (month.length == 1)
+      month = '0' + month;
+
+    let dateFormart = day + '/' + month + '/' + year;
+    return dateFormart;
   }
 }

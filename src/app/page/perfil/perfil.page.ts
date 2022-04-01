@@ -5,6 +5,7 @@ import { Item } from 'src/app/shared/model/Item';
 import { User } from 'src/app/shared/model/User';
 import { FeelingService } from 'src/app/shared/service/feeling.service';
 import { LoginService } from 'src/app/shared/service/login.service';
+import { UtilsService } from 'src/app/shared/util/utils.service';
 
 @Component({
   selector: 'app-perfil',
@@ -14,14 +15,17 @@ import { LoginService } from 'src/app/shared/service/login.service';
 export class PerfilPage implements OnInit {
   loginService: LoginService
   feelingService: FeelingService
+  util: UtilsService
   router: Router
   items: Item[] = [];
   user: User
 
-  constructor(router: Router, loginService: LoginService, feelingService: FeelingService) {
+  constructor(router: Router, loginService: LoginService,
+     feelingService: FeelingService, util: UtilsService) {
     this.router = router
     this.loginService = loginService
     this.feelingService = feelingService
+    this.util = util
   }
 
   ngOnInit() {
@@ -54,7 +58,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/edit']);
   }
 
-  click() {
-    alert("click")
+  removeFeeling(id: string) {
+    this.util.alertConfirmDelete(id, this.feelingService)
   }
 }

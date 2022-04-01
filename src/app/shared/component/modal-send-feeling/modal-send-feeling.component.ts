@@ -58,25 +58,12 @@ export class ModalSendFeelingComponent implements OnInit {
     let item: Item = new Item()
     item.user = this.user
     item.feeling = this.feeling
-    item.date = this.getDate()
+    item.date = this.util.getDate()
+    item.id = this.util.getCurrentTime()
     //
     if(this.feelingService.newFeeling(item)) {
       this.dismissModal()
     }
   }
-
-  getDate() {
-    let date = new Date();
-    let day = date.getDate().toString();
-    let month = (date.getMonth() + 1).toString();
-    let year = date.getFullYear().toString();
-
-    if (day.length == 1)
-      day = '0' + day;
-    if (month.length == 1)
-      month = '0' + month;
-
-    let dateFormart = day + '/' + month + '/' + year;
-    return dateFormart;
-  }
+  
 }

@@ -61,4 +61,9 @@ export class FeelingService {
         });
     })
   }
+
+  removeFeeling(id: string) {
+    this.db.object(`${path}/${id}`).remove();
+    this.util.toast('Sentimento apagado');
+  }
 }
