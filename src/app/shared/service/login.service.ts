@@ -26,7 +26,7 @@ export class LoginService {
     this.router = router,
     this.util = util
   }
-
+  
   login(user: User) {
     this.firebaseauth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
@@ -45,6 +45,7 @@ export class LoginService {
     user.image = result['user']['photoURL']
     //limpando pra nao salvar senha
     user.password = null
+    console.log(user)
     //
     let json = JSON.stringify(user);
     localStorage.setItem('user', json);

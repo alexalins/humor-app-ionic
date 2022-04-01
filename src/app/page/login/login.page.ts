@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
     this.user.email = value['email']
     this.user.password = value['password']
     //
-    this.loginService.login(this.user);
+    this.loginService.login(this.user)
   }
 
   newPassword() {
