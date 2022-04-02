@@ -3,7 +3,6 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { FeelingService } from '../service/feeling.service';
 import { LoginService } from '../service/login.service';
 import { DatePipe } from '@angular/common';
-import { resourceLimits } from 'worker_threads';
 
 @Injectable({
   providedIn: 'root'

@@ -3,18 +3,19 @@
 <ion-content>
   
   <ion-card id="card">
-    <ion-card-header>
-      <img id="icon" src="https://i.pinimg.com/originals/89/b9/69/89b969a4458042ba6da1cab3355187e9.jpg" alt="Perfil"/>
-    </ion-card-header>
+   <!-- <ion-card-header>
+      <img id="icon" [src]=user.image alt="Perfil"/>
+    </ion-card-header> -->
     <ion-card-content>
-      <h2 id="name">Alexa Lins</h2>
-      <h2>alexa.glinsoo@gmail.com</h2>
+      <h2 id="name">{{user.name}}</h2>
+      <h2>{{user.email}}</h2>
     </ion-card-content>
   </ion-card>
 
   <ion-grid id="grid-button">
-    <ion-row>
-      <ion-col>
+   <ion-row>
+      <!-- <ion-col>
+        
         <ion-button expand="block" id="button" (click)="edit()">
           <ion-row>
             <ion-col width-90>Editar</ion-col>
@@ -23,7 +24,7 @@
             </ion-col>
           </ion-row>
         </ion-button>
-      </ion-col>
+      </ion-col>-->
       <ion-col>
         <ion-button expand="block" id="button-outline" color="danger" fill="outline" (click)="exit()">
           <ion-row>

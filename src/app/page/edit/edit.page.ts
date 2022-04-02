@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/shared/model/User';
+import { LoginService } from 'src/app/shared/service/login.service';
 
 @Component({
   selector: 'app-edit',
@@ -8,12 +10,17 @@ import { Router } from '@angular/router';
 })
 export class EditPage implements OnInit {
   router: Router
+  user: User
+  loginService: LoginService
 
-  constructor(router: Router) {
+  constructor(router: Router, loginService: LoginService) {
     this.router = router
+    this.loginService = loginService
   }
 
   ngOnInit() {
+    let json = localStorage.getItem('user');
+    this.user = JSON.parse(json);
   }
 
   back() {
@@ -22,5 +29,13 @@ export class EditPage implements OnInit {
 
   clickFoto() {
     alert("click foto")
+  }
+
+  newPassword() {
+    this.loginService.newPassword(this.user.email);
+  }
+
+  updateUser() {
+    this.loginService.updateProfile(this.user)
   }
 }

@@ -15,15 +15,15 @@
       <img id="icon" src="https://i.pinimg.com/originals/89/b9/69/89b969a4458042ba6da1cab3355187e9.jpg" alt="Perfil"/>
     </ion-card-header>
     <ion-card-content>
-      <h2>alexa.glinsoo@gmail.com</h2>
+      <h2>{{user.email}}</h2>
       <ion-item id="input">
         <ion-label fixed>Nome</ion-label>
-        <ion-input #input type="text" placeholder="Alexa Lins"></ion-input>
+        <ion-input #input type="text" placeholder="{{user.name}}"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" id="button" color="primary" fill="outline">
+  <ion-button expand="block" id="button" color="primary" fill="outline" (click)="newPassword()">
     <ion-row>
       <ion-col width-90>Mudar Senha</ion-col>
       <ion-col width-10>
@@ -32,7 +32,7 @@
     </ion-row>
   </ion-button>
 
-  <ion-button expand="block" id="button">
+  <ion-button expand="block" id="button" (click)="updateUser()">
     <ion-row>
       <ion-col width-90>Concluir</ion-col>
       <ion-col width-10>
@@ -40,4 +40,5 @@
       </ion-col>
     </ion-row>
   </ion-button>
+
 </ion-content>

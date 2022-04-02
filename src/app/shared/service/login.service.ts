@@ -14,6 +14,7 @@ export class LoginService {
   db: AngularFireDatabase
   router: Router
   util: UtilsService
+  myDate: any
 
   constructor(
     firebaseauth: AngularFireAuth,
@@ -28,8 +29,9 @@ export class LoginService {
   }
   
   login(user: User) {
-    this.firebaseauth.signInWithEmailAndPassword(user.email, user.password)
+    this.myDate = this.firebaseauth.signInWithEmailAndPassword(user.email, user.password)
       .then((result) => {
+        this.myDate = result['user']
         this.util.toast('Login efetuado com sucesso');
         this.saveUser(result, user)
         this.router.navigate(['/tabs/lista']);
@@ -39,16 +41,50 @@ export class LoginService {
       });
   }
 
+  async updateProfile(user: User) {
+    const profile = {
+        displayName: user.name,
+        photoURL: 'https://i.pinimg.com/originals/47/c9/a7/47c9a75f5db30562aa87d2ddcd98fc99.jpg'
+    }
+    return (await this.firebaseauth.currentUser).updateProfile(profile)
+    .then((result) => {
+      console.log(result)
+    })
+    .catch((erro) => console.log(erro));
+}
+
   saveUser(result: any, user: User) {
     user.id = result['user']['uid']
     user.name = result['user']['displayName']
     user.image = result['user']['photoURL']
     //limpando pra nao salvar senha
     user.password = null
-    console.log(user)
     //
     let json = JSON.stringify(user);
     localStorage.setItem('user', json);
+  }
+
+  getUser(user: User) {
+    this.firebaseauth.onAuthStateChanged((user) => {
+      if (user) {
+        this.myDate = user;
+        console.log(this.myDate);
+        this.updateUser(user)
+      }
+    })
+  }
+
+  updateUser(user: User) {
+    this.myDate.updateProfile({
+      displayName: user.name,
+      photoURL: user.image
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(` failed ${err}`);
+      });
   }
 
   isExist(): boolean {

@@ -19,6 +19,7 @@ export class PerfilPage implements OnInit {
   router: Router
   items: Item[] = [];
   user: User
+  UploadedFileURL: Observable<string>
 
   constructor(router: Router, loginService: LoginService,
      feelingService: FeelingService, util: UtilsService) {
