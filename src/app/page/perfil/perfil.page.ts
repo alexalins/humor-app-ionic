@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Item } from 'src/app/shared/model/Item';
@@ -19,7 +19,7 @@ export class PerfilPage implements OnInit {
   router: Router
   items: Item[] = [];
   user: User
-  UploadedFileURL: Observable<string>
+  myItem: Observable<any>;
 
   constructor(router: Router, loginService: LoginService,
      feelingService: FeelingService, util: UtilsService) {
@@ -36,9 +36,8 @@ export class PerfilPage implements OnInit {
   }
 
   getMyFeeling() {
-    let myItem: Observable<any>;
-    myItem = this.feelingService.getAllItemFeelingUser();
-    myItem.subscribe(data =>{
+    this.myItem = this.feelingService.getAllItemFeelingUser();
+    this.myItem.subscribe(data =>{
       //depois arrumo isso direito
       for(let item of data) {
         if(item.user.id == this.user.id) {
