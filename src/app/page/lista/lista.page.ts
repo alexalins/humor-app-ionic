@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Item } from 'src/app/shared/model/Item';
 import { FeelingService } from 'src/app/shared/service/feeling.service';
 import { LocalNotifications, LocalNotificationSchema } from '@capacitor/local-notifications';
 import { User } from 'src/app/shared/model/User';
+import { UtilsService } from 'src/app/shared/util/utils.service';
+import { LoginService } from 'src/app/shared/service/login.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista',
@@ -13,11 +16,17 @@ import { User } from 'src/app/shared/model/User';
 export class ListaPage implements OnInit {
 
   feelingService: FeelingService
+  loginService: LoginService
+  subscription: Subscription;
   user: User
-  items: Item[]
+  items: Item[] = []
+  util: UtilsService
 
-  constructor(feelingService: FeelingService) { 
+  constructor(feelingService: FeelingService, private platform: Platform) { 
     this.feelingService = feelingService
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.util.alertLogout(this.loginService)
+    })
   }
 
   ngOnInit() {
@@ -33,8 +42,7 @@ export class ListaPage implements OnInit {
     item.subscribe(data => {
       if(this.items.length > 0 && this.items.length < data.length) {
         let ultimo: number = this.items.length
-        if(data[ultimo].user.id != this.user.id){
-          alert('novo')
+        if(data[ultimo].user.id != this.user.id) {
           this.notification()
         }
       }

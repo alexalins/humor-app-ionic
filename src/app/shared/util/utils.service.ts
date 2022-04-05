@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { FeelingService } from '../service/feeling.service';
 import { LoginService } from '../service/login.service';
 import { DatePipe } from '@angular/common';
@@ -12,7 +12,7 @@ export class UtilsService {
   toastController: ToastController
   alertController: AlertController
 
-  constructor(toastController: ToastController, alertController: AlertController)
+  constructor(toastController: ToastController, alertController: AlertController, private platform: Platform)
    { this.toastController = toastController, this.alertController = alertController }
 
   async toast(message: string) {
@@ -45,6 +45,29 @@ export class UtilsService {
           text: 'Enviar',
           handler: (data) => {
             service.newPassword(data.email);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertLogout(service: LoginService) {
+    const alert = await this.alertController.create({
+      header: 'Confirmação',
+      message: 'Quer sair do aplicativo?',
+      cssClass:'buttonCss',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+          }
+        }, {
+          text: 'Sim',
+          handler: (data) => {
+            service.logout()
           }
         }
       ]
@@ -96,5 +119,11 @@ export class UtilsService {
 
     let dateFormart = day + '/' + month + '/' + year;
     return dateFormart;
+  }
+
+  backButton(loginService) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.alertLogout(loginService)
+    })
   }
 }

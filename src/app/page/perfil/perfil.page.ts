@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { App } from '@capacitor/app';
+import { Platform } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 import { Item } from 'src/app/shared/model/Item';
 import { User } from 'src/app/shared/model/User';
 import { FeelingService } from 'src/app/shared/service/feeling.service';
@@ -20,6 +22,7 @@ export class PerfilPage implements OnInit {
   items: Item[] = [];
   user: User
   myItem: Observable<any>;
+  subscription: Subscription;
 
   constructor(router: Router, loginService: LoginService,
      feelingService: FeelingService, util: UtilsService) {
@@ -27,6 +30,7 @@ export class PerfilPage implements OnInit {
     this.loginService = loginService
     this.feelingService = feelingService
     this.util = util
+    
   }
 
   ngOnInit() {
@@ -46,12 +50,10 @@ export class PerfilPage implements OnInit {
       }
       this.items = this.items.reverse()
     })
-
-    
   }
 
   exit() {
-    this.loginService.logout()
+    this.util.alertLogout(this.loginService)
   }
 
   edit() {
